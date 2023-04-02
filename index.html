@@ -78,13 +78,71 @@
         </form>
     </section>
 </div>
-   <script>                                                                
+ <script>
+    // Get form element
+const form = document.querySelector('form');    
+
+// Add event listener for form submission
+form.addEventListener('submit', function(event) {
+    // Get form input values
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const phoneInput = document.getElementById('phone');
+
+    // Validate input values
+    const nameValue = nameInput.value.trim();
+    const emailValue = emailInput.value.trim();
+    const phoneValue = phoneInput.value.trim();
+
+    if (nameValue === '') {
+        alert('Please enter your name');
+        event.preventDefault();
+        return false;
+    }
+
+    if (emailValue === '') {
+        alert('Please enter your email address');
+        event.preventDefault();
+        return false;
+    } else if (!isValidEmail(emailValue)) {
+        alert('Please enter a valid email address');
+        event.preventDefault();
+        return false;
+    }
+
+    if (phoneValue === '') {
+        alert('Please enter your phone number');
+        event.preventDefault();
+        return false;
+    } else if (!isValidPhone(phoneValue)) {
+        alert('Please enter a valid phone number');
+        event.preventDefault();
+        return false;
+    }
+});
+
+// Function to validate email format
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+// Function to validate phone format
+function isValidPhone(phone) {
+    const phoneRegex = /^\d{11}$/;
+    return phoneRegex.test(phone);
+}
+
 //Function for pop up message
     const submitBtn = document.getElementById('submit');
 submitBtn.addEventListener('click', () => {
   alert('Thank you for Joining us!');
+  event.preventDefault();
 });
- </script>                                                                
+
+
+
+</script>                                                           
 </body>
 <footer>Copyright @PlanetFitness
 </html>
